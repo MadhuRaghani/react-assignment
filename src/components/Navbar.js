@@ -14,7 +14,7 @@ const Navbar = () => {
   return (
     <AppBar position="static" color="primary" sx={{ marginBlockEnd: 0.5 }}>
       <Toolbar>
-        <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+        <Typography variant="h4" component="div" sx={{ flexGrow: 1 }}>
           Shopify
         </Typography>
         <ButtonGroup variant="text" aria-label="Basic button group">

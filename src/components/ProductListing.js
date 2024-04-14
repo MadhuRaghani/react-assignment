@@ -6,9 +6,13 @@ import { ProductContext } from "../contexts/ProductContext";
 function ProductListing() {
   const { products } = useContext(ProductContext);
 
+  const productsToBeShown = products.filter(
+    (product) => !(product?.isDeleted || false)
+  );
+
   return (
     <Grid container sx={{ gap: 1, justifyContent: "center" }}>
-      {products?.map((product) => (
+      {productsToBeShown?.map((product) => (
         <Grid
           item
           sx={{

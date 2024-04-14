@@ -2,10 +2,13 @@
 
 ## install below:
 
-npm install @mui/material @emotion/react @emotion/styled
+npm install @mui/icons-material @mui/material @emotion/styled @emotion/react
+npm i @mui/styles
 npm i react-router-dom
 npm i axios
 npm i react-responsive-carousel
+npm i react-toastify
+npm i material-ui-search-bar
 
 ## to run:
 

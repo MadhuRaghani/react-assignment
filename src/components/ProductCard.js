@@ -10,6 +10,11 @@ import {
   Stack,
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
+// import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/Delete";
+import { useContext } from "react";
+import { ProductContext } from "../contexts/ProductContext";
+import EditModal from "./EditModal";
 
 const ProductCard = ({ product }) => {
   const StyledRating = styled(Rating)({
@@ -17,6 +22,8 @@ const ProductCard = ({ product }) => {
       color: "#0288d1",
     },
   });
+
+  const { products, deleteAProduct, setProducts } = useContext(ProductContext);
 
   return (
     <Container
@@ -60,17 +67,16 @@ const ProductCard = ({ product }) => {
           <Typography variant="body2">{product.stock} left in stock</Typography>
         </CardContent>
         <CardActions sx={{ justifyContent: "space-between", paddingTop: 0 }}>
+          <EditModal product={product} />
           <Button
-            variant="contained"
-            sx={{
-              "&:hover": {
-                backgroundColor: "secondary",
-              },
+            variant="outlined"
+            onClick={() => {
+              deleteAProduct(product.id, products, setProducts);
             }}
+            endIcon={<DeleteIcon />}
           >
-            Edit
+            Delete
           </Button>
-          <Button variant="outlined">Delete</Button>
         </CardActions>
       </Card>
     </Container>

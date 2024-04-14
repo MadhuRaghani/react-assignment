@@ -1,4 +1,5 @@
 import axios from "axios";
+// import { toast } from "react-toastify";
 
 export const getProducts = async (setProducts) => {
   try {
@@ -18,6 +19,49 @@ export const searchProducts = async (query) => {
     );
     if (searchedProductsResponse.status === 200) {
       console.log(searchedProductsResponse.data.products);
+    }
+  } catch (e) {
+    console.error(e);
+  }
+};
+
+export const deleteAProduct = async (productId, products, setProducts) => {
+  try {
+    const deletedProductResponse = await axios.delete(
+      `https://dummyjson.com/products/${productId}`
+    );
+    if (deletedProductResponse.status === 200) {
+      const newProducts = products.map((product) =>
+        product.id === productId ? { ...deletedProductResponse.data } : product
+      );
+      setProducts(newProducts);
+      // toast.warning(`Deleted ${deletedProductResponse.data.title}`);
+    }
+  } catch (e) {
+    console.error(e);
+  }
+};
+
+export const editAProduct = async (
+  productId,
+  updatedProduct,
+  products,
+  setProducts
+) => {
+  try {
+    const updatedProductResponse = await axios.patch(
+      `https://dummyjson.com/products/${productId}`,
+      {
+        ...updatedProduct,
+      },
+      { headers: { "Content-Type": "application/json" } }
+    );
+    if (updatedProductResponse.status === 200) {
+      const newProducts = products.map((product) =>
+        product.id === productId ? { ...updatedProductResponse.data } : product
+      );
+      setProducts(newProducts);
+      // toast.warning(`Updated ${updatedProductResponse.data.title}`);
     }
   } catch (e) {
     console.error(e);

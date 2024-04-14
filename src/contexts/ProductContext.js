@@ -1,5 +1,9 @@
 import { createContext, useEffect, useState } from "react";
-import { getProducts } from "../services/ProductServices";
+import {
+  deleteAProduct,
+  editAProduct,
+  getProducts,
+} from "../services/ProductServices";
 
 export const ProductContext = createContext();
 
@@ -11,7 +15,9 @@ export const ProductContextProvider = ({ children }) => {
   }, []);
 
   return (
-    <ProductContext.Provider value={{ products }}>
+    <ProductContext.Provider
+      value={{ products, editAProduct, deleteAProduct, setProducts }}
+    >
       {children}
     </ProductContext.Provider>
   );

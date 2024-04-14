@@ -1,5 +1,6 @@
 import { createContext, useEffect, useState } from "react";
 import {
+  addAProduct,
   deleteAProduct,
   editAProduct,
   getProducts,
@@ -16,7 +17,13 @@ export const ProductContextProvider = ({ children }) => {
 
   return (
     <ProductContext.Provider
-      value={{ products, editAProduct, deleteAProduct, setProducts }}
+      value={{
+        products,
+        addAProduct,
+        editAProduct,
+        deleteAProduct,
+        setProducts,
+      }}
     >
       {children}
     </ProductContext.Provider>

@@ -7,6 +7,7 @@ import {
   ButtonGroup,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import AddModal from "./AddModal";
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -28,8 +29,8 @@ const Navbar = () => {
         >
           Shopify
         </Typography>
-
-        <ButtonGroup variant="text" aria-label="Basic button group">
+        {/* TODO: SearchBar */}
+        <ButtonGroup variant="text">
           <Button
             color="inherit"
             onClick={() => {
@@ -46,8 +47,7 @@ const Navbar = () => {
           >
             Products
           </Button>
-          {/* TODO: OnClick of Add A Product*/}
-          <Button color="inherit">Add</Button>
+          <AddModal />
         </ButtonGroup>
       </Toolbar>
     </AppBar>

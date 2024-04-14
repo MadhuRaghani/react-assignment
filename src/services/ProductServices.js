@@ -67,3 +67,21 @@ export const editAProduct = async (
     console.error(e);
   }
 };
+
+export const addAProduct = async (productToBeAdded, products, setProducts) => {
+  try {
+    const addedProductResponse = await axios.post(
+      `https://dummyjson.com/products/add`,
+      {
+        ...productToBeAdded,
+      },
+      { headers: { "Content-Type": "application/json" } }
+    );
+    if (addedProductResponse.status === 200) {
+      setProducts([...products, addedProductResponse.data]);
+      // toast.success(`Added ${addedProductResponse.data.title}`);
+    }
+  } catch (e) {
+    console.error(e);
+  }
+};

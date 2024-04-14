@@ -27,6 +27,11 @@ const ProductCard = ({ product }) => {
   const { products, deleteAProduct, setProducts } = useContext(ProductContext);
   const navigate = useNavigate();
 
+  const handleNavigation = (e) => {
+    navigate(`/product/${product.id}`);
+    e.stopPropagation();
+  };
+
   return (
     <Container
       sx={{
@@ -36,10 +41,6 @@ const ProductCard = ({ product }) => {
         cursor: "pointer",
         textAlign: "center",
       }}
-      onClick={(e) => {
-        navigate(`/product/${product.id}`);
-        e.stopPropagation();
-      }}
     >
       <Card style={{ boxShadow: "none" }}>
         <CardMedia
@@ -47,8 +48,9 @@ const ProductCard = ({ product }) => {
           height="180"
           image={product.thumbnail}
           alt={product.title}
+          onClick={(e) => handleNavigation(e)}
         />
-        <CardContent>
+        <CardContent onClick={(e) => handleNavigation(e)}>
           <StyledRating
             name="half-rating-read"
             precision={0.5}
@@ -80,8 +82,9 @@ const ProductCard = ({ product }) => {
           <EditModal product={product} />
           <Button
             variant="outlined"
-            onClick={() => {
+            onClick={(e) => {
               deleteAProduct(product.id, products, setProducts);
+              e.stopPropagation();
             }}
             endIcon={<DeleteIcon />}
           >

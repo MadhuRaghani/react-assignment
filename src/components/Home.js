@@ -4,7 +4,7 @@ import { Box } from "@mui/material";
 
 function Home() {
   return (
-    <Box>
+    <Box style={{ flexGrow: 1 }}>
       <MyCarousel />
     </Box>
   );

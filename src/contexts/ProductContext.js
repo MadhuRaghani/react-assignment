@@ -14,7 +14,7 @@ export const ProductContextProvider = ({ children }) => {
   const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
-    getProducts(setProducts);
+    getProducts(setProducts, 10, 0);
   }, []);
 
   return (

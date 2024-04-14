@@ -7,12 +7,13 @@ import {
   Rating,
   ImageList,
   ImageListItem,
-  Button,
+  Stack,
 } from "@mui/material";
 import { getDiscountedPrice } from "../services/ProductServices";
 import { useParams } from "react-router-dom";
 import { useContext } from "react";
 import { ProductContext } from "../contexts/ProductContext";
+import EditModal from "./EditModal";
 
 function Product() {
   const { productId } = useParams();
@@ -23,17 +24,19 @@ function Product() {
   );
 
   return (
-    <Container maxWidth="sm" sx={{ bgcolor: "white" }}>
+    <Container sx={{ bgcolor: "white", flexGrow: 1 }}>
       <Grid container>
         <Grid item xs={7} sx={{ px: 0.4 }}>
-          <ImageList cols={2} rowHeight={164}>
+          <ImageList cols={2} rowHeight={320}>
             {product?.images?.map((item) => (
               <ImageListItem
                 elevation={2}
-                key={item.img}
+                key={item}
                 sx={{
+                  width: "320px",
                   boxShadow: 2,
                   borderRadius: 1,
+                  my: 1,
                 }}
               >
                 <img
@@ -47,11 +50,12 @@ function Product() {
           </ImageList>
         </Grid>
         <Grid item xs={5} sx={{ px: 0.4 }}>
-          <Typography square elevation={0}>
+          <Box mt={5}></Box>
+          <Typography elevation={0} fontSize={40}>
             {product?.title}
           </Typography>
           <Rating
-            sx={{ fontSize: "0.7rem" }}
+            sx={{ fontSize: "1.2rem" }}
             name="half-rating-read"
             precision={0.5}
             value={product?.rating}
@@ -62,16 +66,17 @@ function Product() {
             <Typography
               variant="overline"
               letterSpacing={0.6}
-              sx={{ fontSize: "0.65rem", mr: 0.8 }}
+              fontSize={24}
+              sx={{ mr: 0.8 }}
             >
               ${getDiscountedPrice(product?.price, product?.discountPercentage)}
             </Typography>
             <Typography
               variant="overline"
+              fontSize={24}
               letterSpacing={0.3}
               sx={{
                 color: "#535666",
-                fontSize: "0.6rem",
                 textDecoration: "line-through",
                 mr: 0.3,
               }}
@@ -79,58 +84,55 @@ function Product() {
               ${product?.price}
             </Typography>
             <Typography
+              fontSize={24}
               variant="overline"
-              sx={{ color: "#cc0a39", fontSize: "0.63rem" }}
+              sx={{ color: "#cc0a39" }}
             >
               ({product?.discountPercentage}% OFF)
             </Typography>
           </Box>
-          <Button
-            sx={{ height: "20px", fontSize: "0.63rem", mb: 1 }}
-            variant="contained"
+          <Stack
+            direction="row"
+            sx={{ justifyContent: "space-between", fontSize: "0.8rem", mb: 1 }}
           >
-            Buy Now
-          </Button>
+            <EditModal product={product} />
+            {/* <Button
+              variant="outlined"
+              onClick={() => {
+                deleteAProduct(product.id, products, setProducts);
+              }}
+              endIcon={<DeleteIcon />}
+            >
+              Delete
+            </Button> */}
+          </Stack>
           <Divider variant="fullWidth" />
           <Box sx={{ mb: 1 }}>
-            <Typography
-              variant="overline"
-              square
-              elevation={0}
-              sx={{ fontSize: "0.5rem" }}
-            >
+            <Typography variant="overline" fontSize={24} elevation={0}>
               Product Details:
             </Typography>
-            <Grid container={"true"} item sx={12}>
-              <Grid item={"true"} xs={6}>
+            <Grid container={true} item xs={12}>
+              <Grid item={true} xs={6}>
                 <Typography
+                  fontSize={20}
                   variant="subtitle1"
-                  square
-                  sx={{ fontSize: "0.5rem", fontWeight: "550" }}
+                  sx={{ fontWeight: "550" }}
                 >
                   Brand
                 </Typography>
                 <Typography
+                  fontSize={20}
                   variant="subtitle1"
-                  square
-                  sx={{ fontSize: "0.5rem", fontWeight: "550" }}
+                  sx={{ fontWeight: "550" }}
                 >
                   Category
                 </Typography>
               </Grid>
-              <Grid item={"true"} xs={6}>
-                <Typography
-                  variant="subtitle1"
-                  square
-                  sx={{ fontSize: "0.5rem" }}
-                >
+              <Grid item={true} xs={6}>
+                <Typography variant="subtitle1" fontSize={20}>
                   {product?.brand}
                 </Typography>
-                <Typography
-                  variant="subtitle1"
-                  square
-                  sx={{ fontSize: "0.5rem" }}
-                >
+                <Typography variant="subtitle1" fontSize={20}>
                   {product?.category}
                 </Typography>
               </Grid>
@@ -138,20 +140,10 @@ function Product() {
           </Box>
           <Divider variant="fullWidth" />
           <Box>
-            <Typography
-              variant="overline"
-              square
-              elevation={0}
-              sx={{ fontSize: "0.5rem" }}
-            >
+            <Typography variant="overline" elevation={0} fontSize={24}>
               About this item
             </Typography>
-            <Typography
-              variant="h6"
-              square
-              elevation={0}
-              sx={{ fontSize: "0.5rem" }}
-            >
+            <Typography variant="h6" elevation={0} fontSize={20}>
               {product?.description}
             </Typography>
           </Box>

@@ -5,9 +5,20 @@ import Product from "./components/Product";
 import ProductListing from "./components/ProductListing";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
+// import { ThemeProvider, createTheme } from "@mui/material/styles";
+
+// const theme = createTheme({
+//   palette: {
+//     primary: {
+//       main: "#704264",
+//       // light: "#f5d0fe",
+//     },
+//   },
+// });
 
 function App() {
   return (
+    // <ThemeProvider theme={theme}>
     <div className="App">
       <Navbar />
       <Routes>
@@ -17,6 +28,7 @@ function App() {
       </Routes>
       <Footer />
     </div>
+    // </ThemeProvider>
   );
 }
 

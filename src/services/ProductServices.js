@@ -1,9 +1,11 @@
 import axios from "axios";
 // import { toast } from "react-toastify";
 
-export const getProducts = async (setProducts) => {
+export const getProducts = async (setProducts, limit = 0, skip = 0) => {
   try {
-    const productsResponse = await axios.get("https://dummyjson.com/products");
+    const productsResponse = await axios.get(
+      `https://dummyjson.com/products?limit=${limit}&skip=${skip}`
+    );
     if (productsResponse.status === 200) {
       setProducts(productsResponse.data.products);
     }
@@ -58,7 +60,7 @@ export const editAProduct = async (
     );
     if (updatedProductResponse.status === 200) {
       const newProducts = products.map((product) =>
-        product.id === productId ? { ...updatedProductResponse.data } : product
+        product.id === productId ? updatedProductResponse.data : product
       );
       setProducts(newProducts);
       // toast.warning(`Updated ${updatedProductResponse.data.title}`);

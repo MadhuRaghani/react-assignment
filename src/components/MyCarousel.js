@@ -23,7 +23,7 @@ const MyCarousel = () => {
     <Carousel showThumbs={false}>
       {images.map((image, index) => (
         <Grid key={index} container justifyContent="center" alignItems="center">
-          <Card item xs={12} sx={{ width: "100%", height: "35rem" }}>
+          <Card xs={12} sx={{ width: "100%", height: "35rem" }}>
             <Paper elevation={3}>
               <img src={image.src} alt={image.alt} />
             </Paper>

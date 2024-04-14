@@ -10,11 +10,12 @@ import {
   Stack,
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
-// import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { useContext } from "react";
 import { ProductContext } from "../contexts/ProductContext";
 import EditModal from "./EditModal";
+import { getDiscountedPrice } from "../services/ProductServices";
+import { useNavigate } from "react-router-dom";
 
 const ProductCard = ({ product }) => {
   const StyledRating = styled(Rating)({
@@ -24,6 +25,7 @@ const ProductCard = ({ product }) => {
   });
 
   const { products, deleteAProduct, setProducts } = useContext(ProductContext);
+  const navigate = useNavigate();
 
   return (
     <Container
@@ -31,6 +33,12 @@ const ProductCard = ({ product }) => {
         p: 2,
         m: 0,
         boxShadow: 2,
+        cursor: "pointer",
+        textAlign: "center",
+      }}
+      onClick={(e) => {
+        navigate(`/product/${product.id}`);
+        e.stopPropagation();
       }}
     >
       <Card style={{ boxShadow: "none" }}>
@@ -47,7 +55,9 @@ const ProductCard = ({ product }) => {
             value={product.rating}
             readOnly
           />
-          <Typography variant="h5">{product.title}</Typography>
+          <Typography variant="h6" noWrap={true}>
+            {product.title}
+          </Typography>
           <Stack
             direction="row"
             spacing={5}
@@ -58,7 +68,7 @@ const ProductCard = ({ product }) => {
               color="primary"
               sx={{ fontWeight: "bold" }}
             >
-              ${product.price}
+              ${getDiscountedPrice(product.price, product.discountPercentage)}
             </Typography>
             <Typography variant="body1" color="#ffb74d">
               {product.discountPercentage}% Off

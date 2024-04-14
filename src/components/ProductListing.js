@@ -19,7 +19,7 @@ function ProductListing() {
             display: "flex",
             alignItems: "center",
             width: "300px",
-            height: "520px",
+            // height: "520px",
             margin: 2,
           }}
           key={product.id}

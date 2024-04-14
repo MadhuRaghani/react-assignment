@@ -1,19 +1,24 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
   AppBar,
   Toolbar,
   Typography,
   Button,
   ButtonGroup,
+  TextField,
+  InputAdornment,
 } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import AddModal from "./AddModal";
+import SearchIcon from "@mui/icons-material/Search";
+import { ProductContext } from "../contexts/ProductContext";
+import { searchProducts } from "../services/ProductServices";
 
 const Navbar = () => {
   const navigate = useNavigate();
-  // const [searchQuery, setSearchQuery] = useState("");
-
-  // console.log(this.props.navigation.state.routeName);
+  const location = useLocation();
+  const { setSearchQuery, setProducts, searchQuery } =
+    useContext(ProductContext);
 
   return (
     <AppBar position="static" color="primary" sx={{ marginBlockEnd: 0.5 }}>
@@ -21,7 +26,6 @@ const Navbar = () => {
         <Typography
           variant="h4"
           component="div"
-          sx={{ flexGrow: 1 }}
           onClick={() => {
             navigate("/");
           }}
@@ -29,7 +33,31 @@ const Navbar = () => {
         >
           Shopify
         </Typography>
-        {/* TODO: SearchBar */}
+        <TextField
+          sx={{ flexGrow: 1, padding: "2px", input: { color: "white" } }}
+          style={{
+            margin: "5px 20px 5px 32px",
+            border: "2px solid white",
+            color: "white",
+          }}
+          autoComplete="off"
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position="start">
+                <SearchIcon
+                  style={{ color: "white", marginInlineStart: "5px" }}
+                />
+              </InputAdornment>
+            ),
+          }}
+          variant="standard"
+          onChange={(e) => {
+            location.pathname !== "/products" && navigate("/products");
+            setSearchQuery(e.target.value);
+            searchProducts(searchQuery, setProducts);
+          }}
+        />
+
         <ButtonGroup variant="text">
           <Button
             color="inherit"

@@ -3,7 +3,11 @@ import { Typography, Link, Container, AppBar, Toolbar } from "@mui/material";
 
 const Footer = () => {
   return (
-    <AppBar position="static" color="primary" sx={{ marginBlockStart: 0.5 }}>
+    <AppBar
+      position="static"
+      color="primary"
+      sx={{ marginBlockStart: 0.5, textAlign: "center" }}
+    >
       <Toolbar>
         <Container maxWidth="md">
           <Typography variant="body1" color="inherit">

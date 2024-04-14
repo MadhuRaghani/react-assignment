@@ -2,13 +2,7 @@ import { useContext, useState } from "react";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import AddIcon from "@mui/icons-material/Add";
-import {
-  Grid,
-  TextField,
-  Button,
-  ButtonGroup,
-  Typography,
-} from "@mui/material";
+import { Grid, TextField, Button, Typography } from "@mui/material";
 import { ProductContext } from "../contexts/ProductContext";
 
 const style = {
@@ -54,6 +48,17 @@ export default function AddModal() {
     e.preventDefault();
     console.log(productData);
     addAProduct(productData, products, setProducts);
+    setProductData({
+      title: "",
+      description: "",
+      price: 0,
+      discountPercentage: 49,
+      rating: 0,
+      stock: 0,
+      brand: "",
+      category: "",
+      thumbnail: "",
+    });
     handleClose();
   };
 
@@ -166,20 +171,16 @@ export default function AddModal() {
                 />
               </Grid>
             </Grid>
-            <ButtonGroup
-              // fullWidth
-              style={{ display: "flex", justifyContent: "space-between" }}
-            >
+            <Box style={{ display: "flex", justifyContent: "space-between" }}>
               <Button
                 variant="outlined"
                 style={{
                   margin: "16px 0",
                   borderWidth: "4px",
-                  borderColor: "primary",
                 }}
                 onClick={() => {
                   setProductData({
-                    title: "Microsoft Surface Laptop 4",
+                    title: "Microsoft Surface 4",
                     description:
                       "Style and speed. Stand out on HD video calls backed by Studio Mics. Capture ideas on the vibrant touchscreen.",
                     price: 1499,
@@ -202,7 +203,7 @@ export default function AddModal() {
               >
                 Submit
               </Button>
-            </ButtonGroup>
+            </Box>
           </form>
         </Box>
       </Modal>

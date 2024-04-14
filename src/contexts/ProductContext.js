@@ -4,12 +4,14 @@ import {
   deleteAProduct,
   editAProduct,
   getProducts,
+  searchProducts,
 } from "../services/ProductServices";
 
 export const ProductContext = createContext();
 
 export const ProductContextProvider = ({ children }) => {
   const [products, setProducts] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
     getProducts(setProducts);
@@ -23,6 +25,9 @@ export const ProductContextProvider = ({ children }) => {
         editAProduct,
         deleteAProduct,
         setProducts,
+        searchQuery,
+        setSearchQuery,
+        searchProducts,
       }}
     >
       {children}

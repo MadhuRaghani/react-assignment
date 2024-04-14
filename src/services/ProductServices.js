@@ -12,13 +12,13 @@ export const getProducts = async (setProducts) => {
   }
 };
 
-export const searchProducts = async (query) => {
+export const searchProducts = async (query, setProducts) => {
   try {
     const searchedProductsResponse = await axios.get(
       `https://dummyjson.com/products/search?q=${query}`
     );
     if (searchedProductsResponse.status === 200) {
-      console.log(searchedProductsResponse.data.products);
+      setProducts(searchedProductsResponse.data.products);
     }
   } catch (e) {
     console.error(e);
@@ -85,3 +85,24 @@ export const addAProduct = async (productToBeAdded, products, setProducts) => {
     console.error(e);
   }
 };
+
+export const getAProduct = async (productId) => {
+  try {
+    const getProductResponse = await axios.get(
+      "https://dummyjson.com/products/" + productId
+    );
+    if (getProductResponse.status === 200) {
+      return { ...getProductResponse.data };
+    }
+  } catch (e) {
+    console.error(e);
+  }
+};
+
+export function getDiscountedPrice(orginalPrice, discountPercentage) {
+  let discountedAmount = (orginalPrice * discountPercentage) / 100;
+  let discountedPrice = orginalPrice - discountedAmount;
+  let roundedDiscountedPrice =
+    Math.round((discountedPrice + Number.EPSILON) * 100) / 100;
+  return roundedDiscountedPrice;
+}

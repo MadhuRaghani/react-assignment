@@ -2,7 +2,6 @@ import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import Home from "./components/Home";
 import Product from "./components/Product";
-
 import ProductListing from "./components/ProductListing";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
